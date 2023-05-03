@@ -61,7 +61,8 @@ const CoffeeStore = (initialProps: {
   } = useContext(StoreContext);
 
   useEffect(() => {
-    if (isEmpty(initialProps.coffeeStore)) {
+    const isEmptyBoolean = isEmpty(initialProps.coffeeStore);
+    if (isEmptyBoolean) {
       if (coffeeStores.length > 0) {
         const findCoffeeStoreById = coffeeStores.find(
           (coffeeStore: {
@@ -73,7 +74,7 @@ const CoffeeStore = (initialProps: {
         setCoffeeStore(findCoffeeStoreById);
       }
     }
-  }, [id]);
+  }, [id, coffeeStores, initialProps.coffeeStore]);
 
   const { name, address, neighbourhood, imgUrl } = coffeeStore;
 
