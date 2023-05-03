@@ -48,17 +48,11 @@ const CoffeeStore = (initialProps: {
   };
 }) => {
   const router = useRouter();
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
-
-  const id = router.query.id;
-
   const [coffeeStore, setCoffeeStore] = useState(initialProps.coffeeStore);
-
   const {
     state: { coffeeStores },
   } = useContext(StoreContext);
+  const id = router.query.id;
 
   useEffect(() => {
     const isEmptyBoolean = isEmpty(initialProps.coffeeStore);
@@ -75,6 +69,10 @@ const CoffeeStore = (initialProps: {
       }
     }
   }, [id, coffeeStores, initialProps.coffeeStore]);
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
 
   const { name, address, neighbourhood, imgUrl } = coffeeStore;
 
